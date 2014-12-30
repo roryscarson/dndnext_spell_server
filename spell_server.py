@@ -47,6 +47,8 @@ class DndSpellsWeb(SimpleHTTPRequestHandler):
                 for spell in self.json_data:
                     if spell['title']==spell_name:
                         body = self.parse_spell(spell)
+                    elif spell['title'].lower()==spell_name:
+                        body = self.parse_spell(spell)
                 if body is None:
                     self.send_error(404, "Spell '%s' not found." % spell_name)
                     return None
