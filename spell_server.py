@@ -1,4 +1,5 @@
 from json import loads
+from urllib import unquote_plus
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 from SocketServer import TCPServer
 from StringIO import StringIO
@@ -42,7 +43,7 @@ class DndSpellsWeb(SimpleHTTPRequestHandler):
             except:
                 return SimpleHTTPRequestHandler.send_head(self)
             if spell_end>1:
-                spell_name = self.path[1:spell_end]
+                spell_name = unquote_plus(self.path[1:spell_end])
                 for spell in self.json_data:
                     if spell['title']==spell_name:
                         body = self.parse_spell(spell)
